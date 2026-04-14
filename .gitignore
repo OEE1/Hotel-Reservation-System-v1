@@ -1,0 +1,14 @@
+# 开发环境临时文件
+*.hot-update.json
+*.hot-update.js
+.tsbuildinfo
+
+# 其他临时文件
+node_modules/
+coverage/
+dist/
+build/
+.next/
+build/
+
+.env*.local

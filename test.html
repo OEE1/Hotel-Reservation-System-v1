@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0.5px 边框解决方案</title>
+  <style>
+    /* 基础样式重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h2 {
+      margin: 20px 0 10px;
+      color: #333;
+    }
+    .demo-box {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 方案1：底部 0.5px 边框 */
+    .border-bottom-half {
+      position: relative;
+    }
+    .border-bottom-half::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: #000;
+      transform: scaleY(0.5);
+      transform-origin: 0 0;
+    }
+
+    /* 方案2：四边 0.5px 边框 */
+    .border-all-half {
+      position: relative;
+    }
+    .border-all-half::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid #000;
+      pointer-events: none; /* 避免遮挡点击事件 */
+      transform: scale(0.5);
+      transform-origin: 0 0;
+    }
+
+    /* 方案3：圆角 0.5px 边框 */
+    .border-rounded-half {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden; /* 确保圆角生效 */
+    }
+    .border-rounded-half::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 1px solid #000;
+      pointer-events: none;
+      transform: scale(0.5);
+      transform-origin: 0 0;
+      border-radius: 20px; /* 放大后的圆角半径（实际半径 = 20px * 0.5 = 10px） */
+    }
+
+    /* 方案4：背景渐变模拟边框（仅底部） */
+    .border-gradient-half {
+      background: 
+        linear-gradient(to bottom, #000 50%, transparent 50%) 0 0 / 100% 1px no-repeat;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>1. 底部 0.5px 边框（伪元素 + transform）</h2>
+    <div class="demo-box border-bottom-half">
+      <p>通过伪元素 `::after` 和 `transform: scaleY(0.5)` 实现底部细边框。</p>
+    </div>
+
+    <h2>2. 四边 0.5px 边框（伪元素 + transform）</h2>
+    <div class="demo-box border-all-half">
+      <p>通过伪元素 `::after` 和 `transform: scale(0.5)` 实现四边细边框。</p>
+    </div>
+
+    <h2>3. 圆角 0.5px 边框（伪元素 + transform）</h2>
+    <div class="demo-box border-rounded-half">
+      <p>结合 `border-radius` 和伪元素缩放，实现圆角细边框。</p>
+    </div>
+
+    <h2>4. 背景渐变模拟边框（仅底部）</h2>
+    <div class="demo-box border-gradient-half">
+      <p>通过 `background: linear-gradient` 模拟底部细边框（兼容性略低）。</p>
+    </div>
+  </div>
+</body>
+</html>

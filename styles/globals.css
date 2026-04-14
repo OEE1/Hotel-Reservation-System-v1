@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .spinner {
+    margin: 3.2rem auto 1.6rem;
+    width: 60px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid theme("colors.primary.900");
+    border-right-color: theme("colors.primary.200");
+    animation: rotate 1s infinite linear;
+  }
+
+  .spinner-mini {
+    margin: 0;
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid theme("colors.primary.200");
+    border-right-color: transparent;
+    animation: rotate 1s infinite linear;
+  }
+
+  /* 隐藏 WebKit 浏览器（Chrome, Safari, Edge）的滚动条 */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 隐藏 Firefox 的滚动条 */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /**
+   * AI 助手消息列表主滚动区：细滚动条、无 WebKit 箭头、与面板配色一致
+   */
+  .chat-message-scroll {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: theme("colors.primary.600") theme("colors.primary.800");
+  }
+
+  .chat-message-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-message-scroll::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .chat-message-scroll::-webkit-scrollbar-track {
+    background: theme("colors.primary.800");
+    border-radius: 9999px;
+  }
+
+  .chat-message-scroll::-webkit-scrollbar-thumb {
+    background: theme("colors.primary.600");
+    border-radius: 9999px;
+  }
+
+  .chat-message-scroll::-webkit-scrollbar-thumb:hover {
+    background: theme("colors.accent.600");
+  }
+
+  @keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+/* For date picker */
+.rdp {
+  --rdp-cell-size: 32px !important;
+  --rdp-accent-color: theme("colors.accent.500") !important;
+  --rdp-background-color: theme("colors.accent.600") !important;
+  margin: 0 !important;
+}
